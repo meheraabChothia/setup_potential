@@ -7,10 +7,20 @@ sudo apt upgrade
 sudo apt install git
 sudo apt install tmux
 sudo apt install stow
+sudo apt install curl
 
 # dotfiles and configs
 cd
-git clone https://github.com/meheraabChothia/.dotfiles.git
+
+REPO_URL=https://github.com/meheraabChothia/.dotfiles.git
+DEST=~/.dotfiles
+
+if [ -d "$DEST" ]; then
+  echo "Directory $DEST already exists – skipping clone."
+else
+  git clone "$REPO_URL" "$DEST"
+fi
+
 cd .dotfiles
 cp bash/.bashrc bash/.bash_aliases ..
 cd
@@ -19,7 +29,7 @@ cd
 cd
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source ~/.bashrc
-mkdir aider
+mkdir -p aider
 cd aider
 uv init
 uv add aider-install
@@ -37,7 +47,16 @@ stow lazy_nvim/
 
 # tmux configs:
 cd
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+REPO_URL=https://github.com/tmux-plugins/tpm
+DEST=~/.tmux/plugins/tpm
+
+if [ -d "$DEST" ]; then
+  echo "Directory $DEST already exists – skipping clone."
+else
+  git clone "$REPO_URL" "$DEST"
+fi
+
 cd .dotfiles
 cp tmux/.tmux.conf ~/
 cd
