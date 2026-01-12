@@ -28,7 +28,7 @@ cd
 # uv and aider
 cd
 curl -LsSf https://astral.sh/uv/install.sh | sh
-source ~/.bashrc
+source $HOME/.local/bin/env
 mkdir -p aider
 cd aider
 uv init
